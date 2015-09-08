@@ -138,7 +138,7 @@ function WordSplitLMMinibatchLoader.text_to_tensor(in_textfile, out_vocabfile, o
     local unordered = {}
     rawdata = f:read(cache_len)
     repeat
-        i=1
+        i=0
         for word in rawdata:gmatch("%S+") do
             if not unordered[word] then unordered[word] = true end
             i = i+1
@@ -163,12 +163,12 @@ function WordSplitLMMinibatchLoader.text_to_tensor(in_textfile, out_vocabfile, o
     local currlen = 0
     rawdata = f:read(cache_len)
     repeat
-        i=1
+        i=0
         for word in rawdata:gmatch("%S+") do
+            i = i+1
             data[currlen+i] = vocab_mapping[word]
         -- for i=1, #rawdata do
             -- data[currlen+i] = vocab_mapping[rawdata:sub(i, i)] -- lua has no string indexing using []
-            i = i+1
         end
         currlen = currlen + i
         rawdata = f:read(cache_len)
