@@ -140,8 +140,8 @@ function WordSplitLMMinibatchLoader.text_to_tensor(in_textfile, out_vocabfile, o
     repeat
         i=0
         for word in rawdata:gmatch("%S+") do
-            if not unordered[word] then unordered[word] = true end
             i = i+1
+            if not unordered[word] then unordered[word] = true end
         end
         tot_len = tot_len + i
         rawdata = f:read(cache_len)
